@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Search, ChevronRight } from 'lucide-react';
 import {
   CommandDialog,
   CommandEmpty,
@@ -40,6 +40,14 @@ export function SearchCommand({ open, onOpenChange, onNavigate }: SearchCommandP
     }
   }, [open]);
 
+  // Format breadcrumb path for display
+  const formatBreadcrumb = (breadcrumb: string[] | undefined, title: string): string => {
+    if (!breadcrumb || breadcrumb.length <= 1) return '';
+    // Remove the last item (current title) from breadcrumb
+    const parentPath = breadcrumb.slice(0, -1);
+    return parentPath.join(' > ');
+  };
+
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
       <CommandInput 
@@ -47,31 +55,49 @@ export function SearchCommand({ open, onOpenChange, onNavigate }: SearchCommandP
         value={query}
         onValueChange={setQuery}
       />
-      <CommandList>
+      <CommandList className="max-h-[400px]">
         <CommandEmpty>没有找到相关结果</CommandEmpty>
         {results.length > 0 && (
-          <CommandGroup heading="搜索结果">
-            {results.map((item) => (
-              <CommandItem
-                key={item.id}
-                value={item.path || item.id}
-                onSelect={() => item.path && handleSelect(item.path)}
-                className="flex items-center justify-between py-3 cursor-pointer"
-              >
-                <div className="flex flex-col gap-1">
-                  <span className="font-medium">{item.title}</span>
-                  {item.breadcrumb && (
-                    <span className="text-xs text-muted-foreground">
-                      {item.breadcrumb.slice(0, -1).join(' > ')}
-                    </span>
-                  )}
-                </div>
-                <div className="flex items-center gap-2">
-                  {item.isNew && <DevIndicator />}
-                  <MethodBadge method={item.method || null} />
-                </div>
-              </CommandItem>
-            ))}
+          <CommandGroup heading={`搜索结果 (${results.length})`}>
+            {results.map((item) => {
+              const parentPath = formatBreadcrumb(item.breadcrumb, item.title);
+              
+              return (
+                <CommandItem
+                  key={item.id}
+                  value={`${item.path} ${item.title} ${parentPath}`}
+                  onSelect={() => item.path && handleSelect(item.path)}
+                  className="flex items-center gap-3 py-3 px-3 cursor-pointer group"
+                >
+                  {/* Left: Method Badge */}
+                  <div className="shrink-0 w-14">
+                    <MethodBadge method={item.method || null} />
+                  </div>
+                  
+                  {/* Middle: Title and Path */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className={`font-medium truncate ${item.isDeprecated ? 'line-through text-muted-foreground' : 'text-foreground'}`}>
+                        {item.title}
+                      </span>
+                      {item.isNew && <DevIndicator />}
+                    </div>
+                    {parentPath && (
+                      <div className="flex items-center gap-1 text-xs text-muted-foreground mt-0.5 truncate">
+                        {item.breadcrumb?.slice(0, -1).map((segment, index, arr) => (
+                          <span key={index} className="flex items-center gap-1">
+                            <span className="truncate max-w-[120px]">{segment}</span>
+                            {index < arr.length - 1 && (
+                              <ChevronRight className="w-3 h-3 shrink-0 text-muted-foreground/60" />
+                            )}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </CommandItem>
+              );
+            })}
           </CommandGroup>
         )}
       </CommandList>
