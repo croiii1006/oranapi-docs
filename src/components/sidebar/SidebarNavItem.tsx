@@ -24,7 +24,7 @@ export function SidebarNavItem({
   const isExpanded = expandedIds.has(item.id);
   const isActive = item.path === location.pathname;
 
-  const paddingLeft = 12 + level * 16;
+  const paddingLeft = 12 + level * 12;
 
   if (hasChildren) {
     return (
@@ -33,20 +33,23 @@ export function SidebarNavItem({
           onClick={() => toggleExpand(item.id)}
           className={cn(
             'w-full flex items-center justify-between py-2 pr-3 text-sm rounded-md transition-all duration-150',
-            'hover:bg-sidebar-hover',
+            'hover:bg-sidebar-hover group',
             isExpanded && 'text-foreground font-medium',
             !isExpanded && 'text-muted-foreground'
           )}
           style={{ paddingLeft }}
         >
-          <span className={cn(item.isDeprecated && 'deprecated-text')}>
+          <span className={cn(
+            'truncate flex-1 text-left mr-2',
+            item.isDeprecated && 'deprecated-text'
+          )}>
             {item.title}
           </span>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 shrink-0">
             {item.isNew && <DevIndicator />}
             <ChevronRight 
               className={cn(
-                'h-4 w-4 transition-transform duration-200',
+                'h-4 w-4 transition-transform duration-200 text-muted-foreground',
                 isExpanded && 'rotate-90'
               )} 
             />
@@ -82,12 +85,12 @@ export function SidebarNavItem({
         style={{ paddingLeft }}
       >
         <span className={cn(
-          'truncate flex-1',
+          'truncate flex-1 min-w-0 mr-2',
           item.isDeprecated && 'deprecated-text'
         )}>
           {item.title}
         </span>
-        <div className="flex items-center gap-1.5 shrink-0">
+        <div className="flex items-center gap-1.5 shrink-0 ml-auto">
           {item.isNew && <DevIndicator />}
           <MethodBadge method={item.method || null} isActive={isActive} />
         </div>
@@ -100,7 +103,10 @@ export function SidebarNavItem({
       className="sidebar-item cursor-default"
       style={{ paddingLeft }}
     >
-      <span className={cn(item.isDeprecated && 'deprecated-text')}>
+      <span className={cn(
+        'truncate flex-1',
+        item.isDeprecated && 'deprecated-text'
+      )}>
         {item.title}
       </span>
       {item.isNew && <DevIndicator />}
