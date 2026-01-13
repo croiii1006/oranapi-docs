@@ -4,7 +4,6 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { SidebarNavItem } from './SidebarNavItem';
 import { SearchCommand, SearchTrigger } from './SearchCommand';
 import { useNavigation } from '@/hooks/useNavigation';
-import { Zap } from 'lucide-react';
 
 export function Sidebar() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -69,19 +68,19 @@ export function Sidebar() {
 
   return (
     <>
-      <aside className="w-[280px] lg:w-[300px] h-screen flex flex-col bg-sidebar border-r border-sidebar-border shrink-0">
+      <aside className="w-[300px] h-screen flex flex-col bg-sidebar border-r border-sidebar-border shrink-0">
         {/* Logo */}
-        <div className="p-4 border-b border-sidebar-border">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center">
-              <Zap className="w-5 h-5 text-primary-foreground" />
+        <div className="px-4 py-3.5 border-b border-sidebar-border">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#E67E22] to-[#D35400] flex items-center justify-center shadow-sm">
+              <span className="text-white font-bold text-lg">O</span>
             </div>
-            <span className="font-semibold text-lg text-foreground">OranAI API</span>
+            <span className="font-bold text-lg text-slate-900 dark:text-foreground tracking-tight">OranAI API</span>
           </div>
         </div>
 
         {/* Search */}
-        <div className="p-3 border-b border-sidebar-border">
+        <div className="px-3 py-2.5 border-b border-sidebar-border">
           <SearchTrigger onClick={() => setSearchOpen(true)} />
         </div>
 
