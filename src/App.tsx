@@ -15,9 +15,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          {/* All documentation routes use the same layout */}
+          <Route path="/*" element={<Index />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
