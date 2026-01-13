@@ -24,7 +24,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
           }
         });
       },
-      { rootMargin: '-100px 0px -70% 0px' }
+      { rootMargin: '-80px 0px -70% 0px' }
     );
 
     items.forEach((item) => {
@@ -44,8 +44,8 @@ export function TableOfContents({ items }: TableOfContentsProps) {
 
   return (
     <div className="sticky top-8 w-56 shrink-0 hidden xl:block">
-      <div className="p-4 bg-muted/50 rounded-lg border border-border">
-        <div className="flex items-center gap-2 mb-3 text-sm font-medium text-foreground">
+      <div className="p-4 bg-muted/30 rounded-xl border border-border">
+        <div className="flex items-center gap-2 mb-4 text-sm font-semibold text-foreground">
           <List className="h-4 w-4" />
           目录
         </div>
@@ -55,12 +55,12 @@ export function TableOfContents({ items }: TableOfContentsProps) {
               key={item.id}
               onClick={() => handleClick(item.id)}
               className={cn(
-                'block w-full text-left text-sm py-1 px-2 rounded transition-colors',
+                'block w-full text-left text-[13px] py-1.5 px-3 rounded-lg transition-all duration-200',
                 'hover:bg-muted',
-                item.level === 2 ? 'pl-2' : 'pl-5',
+                item.level === 2 ? 'pl-3' : 'pl-6',
                 activeId === item.id
-                  ? 'text-primary font-medium bg-primary/5'
-                  : 'text-muted-foreground'
+                  ? 'text-primary font-medium bg-primary/10'
+                  : 'text-muted-foreground hover:text-foreground'
               )}
             >
               {item.title}

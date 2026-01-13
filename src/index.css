@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* OranAI API Documentation Design System */
+/* OranAI API Documentation Design System - Apifox Style */
 
 @layer base {
   :root {
@@ -17,7 +18,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 252 100% 67%;
+    --primary: 24 95% 50%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 220 14% 96%;
@@ -26,7 +27,7 @@
     --muted: 220 14% 96%;
     --muted-foreground: 220 9% 46%;
 
-    --accent: 252 100% 67%;
+    --accent: 24 95% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -34,7 +35,7 @@
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 252 100% 67%;
+    --ring: 24 95% 50%;
 
     --radius: 0.5rem;
 
@@ -42,8 +43,8 @@
     --sidebar-background: 220 14% 97%;
     --sidebar-foreground: 222 47% 11%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-active: 252 100% 97%;
-    --sidebar-active-foreground: 252 100% 50%;
+    --sidebar-active: 24 100% 97%;
+    --sidebar-active-foreground: 24 95% 45%;
     --sidebar-hover: 220 14% 94%;
 
     /* HTTP Method Colors */
@@ -67,8 +68,22 @@
     --status-dev: 217 91% 60%;
     --status-deprecated: 220 9% 60%;
 
+    /* Blockquote colors */
+    --blockquote-info-bg: 270 100% 98%;
+    --blockquote-info-border: 263 70% 50%;
+    --blockquote-warning-bg: 45 100% 96%;
+    --blockquote-warning-border: 45 93% 47%;
+    --blockquote-tip-bg: 142 76% 96%;
+    --blockquote-tip-border: 142 71% 45%;
+
+    /* Code colors */
+    --code-bg: 222 47% 5%;
+    --code-foreground: 210 40% 96%;
+    --code-inline-bg: 220 14% 96%;
+    --code-inline-foreground: 263 70% 50%;
+
     /* Search */
-    --search-highlight: 252 100% 67%;
+    --search-highlight: 24 95% 50%;
   }
 
   .dark {
@@ -81,7 +96,7 @@
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 252 100% 67%;
+    --primary: 24 95% 55%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 217 33% 17%;
@@ -103,9 +118,23 @@
     --sidebar-background: 222 47% 8%;
     --sidebar-foreground: 210 40% 98%;
     --sidebar-border: 217 33% 17%;
-    --sidebar-active: 252 100% 15%;
-    --sidebar-active-foreground: 252 100% 80%;
+    --sidebar-active: 24 100% 15%;
+    --sidebar-active-foreground: 24 95% 70%;
     --sidebar-hover: 217 33% 15%;
+
+    /* Blockquote colors - dark mode */
+    --blockquote-info-bg: 263 40% 15%;
+    --blockquote-info-border: 263 70% 50%;
+    --blockquote-warning-bg: 45 50% 15%;
+    --blockquote-warning-border: 45 93% 47%;
+    --blockquote-tip-bg: 142 40% 15%;
+    --blockquote-tip-border: 142 71% 45%;
+
+    /* Code colors - dark mode */
+    --code-bg: 222 47% 5%;
+    --code-foreground: 210 40% 96%;
+    --code-inline-bg: 217 33% 20%;
+    --code-inline-foreground: 263 70% 70%;
   }
 }
 
@@ -118,9 +147,33 @@
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
 }
 
 @layer components {
+  /* Code font */
+  .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  }
+
   .method-badge {
     @apply px-2 py-0.5 text-xs font-semibold rounded tracking-wide transition-all duration-200;
   }
@@ -176,5 +229,34 @@
 
   .sidebar-item.active {
     @apply bg-sidebar-active text-sidebar-active-foreground font-medium;
+  }
+
+  /* Inline code styling */
+  .inline-code {
+    @apply px-1.5 py-0.5 rounded text-sm font-mono;
+    background-color: hsl(var(--code-inline-bg));
+    color: hsl(var(--code-inline-foreground));
+  }
+
+  /* Doc headings with underline */
+  .doc-heading-h1 {
+    @apply text-[30px] font-bold text-foreground pb-4 border-b border-border mb-6;
+  }
+
+  .doc-heading-h2 {
+    @apply text-2xl font-semibold text-foreground mb-4 scroll-mt-20;
+  }
+
+  .doc-heading-h3 {
+    @apply text-lg font-medium text-foreground mb-3 mt-6;
+  }
+
+  /* Page navigation */
+  .page-nav-link {
+    @apply flex-1 p-4 rounded-xl border-2 border-border transition-all duration-200;
+  }
+
+  .page-nav-link:hover {
+    @apply border-primary/50 bg-primary/5;
   }
 }
