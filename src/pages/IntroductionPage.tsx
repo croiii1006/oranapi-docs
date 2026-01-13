@@ -5,6 +5,7 @@ import { Blockquote } from '@/components/docs/Blockquote';
 import { StatusCard } from '@/components/docs/StatusCard';
 import { TableOfContents } from '@/components/docs/TableOfContents';
 import { PageNavigation } from '@/components/docs/PageNavigation';
+import CopyPageDropdown from '@/components/docs/CopyPageDropdown';
 import { BASE_URL, CONTACT_EMAIL, SYSTEM_NAME } from '@/config/constants';
 
 const tocItems = [
@@ -32,9 +33,13 @@ export function IntroductionPage() {
   return (
     <div className="flex gap-10">
       {/* Main Content */}
-      <article className="flex-1 min-w-0 max-w-[1000px]">
-        {/* Hero Section */}
-        <h1 className="doc-heading-h1">{SYSTEM_NAME} 接口文档总览</h1>
+      <article className="docs-content flex-1 min-w-0 max-w-[1000px]">
+        {/* Header with Title and Actions */}
+        <div className="flex items-start justify-between gap-4 mb-1">
+          <h1 className="doc-heading-h1 !border-b-0 !pb-0 !mb-0">{SYSTEM_NAME} 接口文档总览</h1>
+          <CopyPageDropdown pageTitle="介绍" />
+        </div>
+        <div className="border-b border-border/40 mb-6 pb-4" />
         
         <Blockquote variant="info">
           本文是 {SYSTEM_NAME} 项目文档的「总介绍」。涵盖聊天、图像生成、视频生成、音乐生成等能力的统一说明、调用规范与示例。请先阅读「接口状态说明」，再开始调试。
