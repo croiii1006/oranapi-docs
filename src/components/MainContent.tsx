@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useNavigation } from '@/hooks/useNavigation';
 import { IntroductionPage } from '@/pages/IntroductionPage';
+import { PageNavigation } from '@/components/docs/PageNavigation';
 import { BASE_URL } from '@/config/constants';
 
 export function MainContent() {
@@ -16,7 +17,7 @@ export function MainContent() {
 
   return (
     <main className="flex-1 min-w-0 h-screen overflow-auto bg-background">
-      <div className="max-w-5xl mx-auto px-8 py-8">
+      <div className="max-w-[1200px] mx-auto px-10 py-10">
         {/* Header - only show for non-introduction pages */}
         {!isIntroduction && (
           <div className="mb-8">
@@ -25,7 +26,7 @@ export function MainContent() {
                 {breadcrumb.slice(0, -1).join(' / ')}
               </div>
             )}
-            <h1 className="text-3xl font-bold text-foreground">{title}</h1>
+            <h1 className="doc-heading-h1">{title}</h1>
           </div>
         )}
 
@@ -43,18 +44,21 @@ export function MainContent() {
 function PlaceholderContent({ title }: { title: string }) {
   return (
     <div className="space-y-6">
-      <div className="p-6 bg-muted/50 rounded-lg border border-border">
+      <div className="p-6 bg-muted/30 rounded-xl border border-border">
         <p className="text-muted-foreground">
           此页面将展示 <span className="font-medium text-foreground">{title}</span> 的详细文档内容。
         </p>
       </div>
       
-      <div className="p-4 bg-muted rounded-lg font-mono text-sm">
+      <div className="p-4 bg-muted/50 rounded-lg font-mono text-sm">
         <div className="flex items-center justify-between">
           <span className="text-muted-foreground">BASE_URL:</span>
           <code className="text-foreground">{BASE_URL}</code>
         </div>
       </div>
+
+      {/* Page Navigation for placeholder pages too */}
+      <PageNavigation />
     </div>
   );
 }
