@@ -8,36 +8,12 @@ import { Zap } from 'lucide-react';
 
 export function Sidebar() {
   const [searchOpen, setSearchOpen] = useState(false);
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set(['openai']));
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
   const location = useLocation();
   const { navigationData, getParentIds } = useNavigation();
   
-  // Track manually collapsed items to prevent auto-expansion
-  const manuallyCollapsedRef = useRef<Set<string>>(new Set());
-  // Track previous path to detect navigation changes
-  const prevPathRef = useRef<string>(location.pathname);
-
-  // Expand parents when navigating (only on actual navigation, respecting manual collapse)
-  const expandToPath = useCallback((path: string, force: boolean = false) => {
-    const parentIds = getParentIds(path);
-    if (parentIds.length > 0) {
-      setExpandedIds(prev => {
-        const newSet = new Set(prev);
-        parentIds.forEach(id => {
-          // Only expand if not manually collapsed, or if forced (e.g., from search)
-          if (force || !manuallyCollapsedRef.current.has(id)) {
-            newSet.add(id);
-          }
-        });
-        return newSet;
-      });
-      
-      // If forced, clear the manually collapsed state for these parents
-      if (force) {
-        parentIds.forEach(id => manuallyCollapsedRef.current.delete(id));
-      }
-    }
-  }, [getParentIds]);
+  // Track if initial expansion has been done
+  const hasInitializedRef = useRef(false);
 
   // Handle keyboard shortcut
   useEffect(() => {
@@ -52,42 +28,44 @@ export function Sidebar() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Expand to current path on mount and when navigating to a NEW path
+  // Only auto-expand on initial mount
   useEffect(() => {
-    const isNewPath = prevPathRef.current !== location.pathname;
-    prevPathRef.current = location.pathname;
-    
-    if (isNewPath) {
-      // Clear manually collapsed state when navigating to a new page
-      // so parents of the new active item get expanded
+    if (!hasInitializedRef.current) {
+      hasInitializedRef.current = true;
       const parentIds = getParentIds(location.pathname);
-      parentIds.forEach(id => manuallyCollapsedRef.current.delete(id));
+      if (parentIds.length > 0) {
+        setExpandedIds(new Set(parentIds));
+      } else {
+        // Default expand openai section
+        setExpandedIds(new Set(['openai']));
+      }
     }
-    
-    expandToPath(location.pathname);
-  }, [location.pathname, expandToPath, getParentIds]);
+  }, [location.pathname, getParentIds]);
 
-  // Toggle expand/collapse - tracks manual collapse state
+  // Simple toggle - just flip the state, no complex tracking
   const toggleExpand = useCallback((id: string) => {
     setExpandedIds(prev => {
       const newSet = new Set(prev);
       if (newSet.has(id)) {
-        // User is collapsing - track this as manual collapse
-        manuallyCollapsedRef.current.add(id);
         newSet.delete(id);
       } else {
-        // User is expanding - remove from manually collapsed
-        manuallyCollapsedRef.current.delete(id);
         newSet.add(id);
       }
       return newSet;
     });
   }, []);
 
+  // Force expand when navigating from search
   const handleSearchNavigate = useCallback((path: string) => {
-    // Force expand when navigating from search
-    expandToPath(path, true);
-  }, [expandToPath]);
+    const parentIds = getParentIds(path);
+    if (parentIds.length > 0) {
+      setExpandedIds(prev => {
+        const newSet = new Set(prev);
+        parentIds.forEach(id => newSet.add(id));
+        return newSet;
+      });
+    }
+  }, [getParentIds]);
 
   return (
     <>
