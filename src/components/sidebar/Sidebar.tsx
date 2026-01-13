@@ -68,7 +68,7 @@ export function Sidebar() {
 
   return (
     <>
-      <aside className="w-[300px] h-screen flex flex-col bg-sidebar border-r border-sidebar-border shrink-0">
+      <aside className="w-[300px] min-w-[300px] h-screen flex flex-col bg-sidebar border-r border-sidebar-border shrink-0">
         {/* Logo */}
         <div className="px-4 py-3.5 border-b border-sidebar-border">
           <div className="flex items-center gap-3">
