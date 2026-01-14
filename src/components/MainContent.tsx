@@ -4,6 +4,15 @@ import { IntroductionPage } from '@/pages/IntroductionPage';
 import { UserInfoPage } from '@/pages/system/UserInfoPage';
 import { KeyInfoPage } from '@/pages/system/KeyInfoPage';
 import { OpenAIIntroductionPage } from '@/pages/openai/IntroductionPage';
+import { CodexTutorialPage } from '@/pages/openai/codex/TutorialPage';
+import { GptsRequestPage } from '@/pages/openai/chat/GptsRequestPage';
+import { ChunkObjectPage } from '@/pages/openai/chat/ChunkObjectPage';
+import { ChatCompletionsPage } from '@/pages/openai/chat/CompletionsPage';
+import { ImagesReadmePage } from '@/pages/openai/images/ReadmePage';
+import { ImageObjectPage } from '@/pages/openai/images/ObjectPage';
+import { CreateImagePage } from '@/pages/openai/images/CreatePage';
+import { EditImagePage } from '@/pages/openai/images/EditPage';
+import { VariationImagePage } from '@/pages/openai/images/VariationPage';
 import { PageNavigation } from '@/components/docs/PageNavigation';
 import { BASE_URL } from '@/config/constants';
 
@@ -11,32 +20,40 @@ export function MainContent() {
   const location = useLocation();
   const { flatItems } = useNavigation();
 
-  // Find current item
   const currentItem = flatItems.find(item => item.path === location.pathname);
   const breadcrumb = currentItem?.breadcrumb || [];
   const title = currentItem?.title || '欢迎使用 OranAI API';
 
-  const isIntroduction = location.pathname === '/introduction' || location.pathname === '/';
-  const isUserInfo = location.pathname === '/system/user-info';
-  const isKeyInfo = location.pathname === '/system/key-info';
-  const isOpenAIIntro = location.pathname === '/openai/introduction';
+  const path = location.pathname;
 
-  // Check if current page has a custom component
-  const hasCustomPage = isIntroduction || isUserInfo || isKeyInfo || isOpenAIIntro;
+  // Map paths to components
+  const pageComponents: Record<string, JSX.Element> = {
+    '/': <IntroductionPage />,
+    '/introduction': <IntroductionPage />,
+    '/system/user-info': <UserInfoPage />,
+    '/system/key-info': <KeyInfoPage />,
+    '/openai/introduction': <OpenAIIntroductionPage />,
+    '/openai/codex/tutorial': <CodexTutorialPage />,
+    '/openai/chat/gpts': <GptsRequestPage />,
+    '/openai/chat/chunk': <ChunkObjectPage />,
+    '/openai/chat/completions': <ChatCompletionsPage />,
+    '/openai/images/readme': <ImagesReadmePage />,
+    '/openai/images/object': <ImageObjectPage />,
+    '/openai/images/create': <CreateImagePage />,
+    '/openai/images/edit': <EditImagePage />,
+    '/openai/images/variation': <VariationImagePage />,
+  };
 
-  // Render the appropriate page component
+  const hasCustomPage = path in pageComponents;
+
   const renderContent = () => {
-    if (isIntroduction) return <IntroductionPage />;
-    if (isUserInfo) return <UserInfoPage />;
-    if (isKeyInfo) return <KeyInfoPage />;
-    if (isOpenAIIntro) return <OpenAIIntroductionPage />;
+    if (pageComponents[path]) return pageComponents[path];
     return <PlaceholderContent title={title} />;
   };
 
   return (
     <main className="flex-1 min-w-0 h-screen overflow-auto bg-background">
       <div className="max-w-[1200px] mx-auto px-10 py-10">
-        {/* Header - only show for placeholder pages */}
         {!hasCustomPage && (
           <div className="mb-8">
             {breadcrumb.length > 1 && (
@@ -47,8 +64,6 @@ export function MainContent() {
             <h1 className="doc-heading-h1">{title}</h1>
           </div>
         )}
-
-        {/* Content */}
         {renderContent()}
       </div>
     </main>
@@ -71,7 +86,6 @@ function PlaceholderContent({ title }: { title: string }) {
         </div>
       </div>
 
-      {/* Page Navigation for placeholder pages too */}
       <PageNavigation />
     </div>
   );
