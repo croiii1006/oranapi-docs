@@ -18,6 +18,12 @@ import TranscriptionPage from '@/pages/openai/audio/TranscriptionPage';
 import TranslationPage from '@/pages/openai/audio/TranslationPage';
 import CompletionObjectPage from '@/pages/openai/completions/ObjectPage';
 import CreateCompletionPage from '@/pages/openai/completions/CreatePage';
+import GoogleGenerateContentPage from '@/pages/google/chat/GenerateContentPage';
+import GoogleStreamGenerateContentPage from '@/pages/google/chat/StreamGenerateContentPage';
+import GoogleGenerateImagePage from '@/pages/google/image/GenerateImagePage';
+import GoogleStreamGenerateImagePage from '@/pages/google/image/StreamGenerateImagePage';
+import GoogleAnalyzeMediaPage from '@/pages/google/analyze/AnalyzeMediaPage';
+import GoogleAnalyzeYouTubePage from '@/pages/google/analyze/AnalyzeYouTubePage';
 import { PageNavigation } from '@/components/docs/PageNavigation';
 import { BASE_URL } from '@/config/constants';
 
@@ -52,6 +58,12 @@ export function MainContent() {
     '/openai/audio/translation': <TranslationPage />,
     '/openai/completions/object': <CompletionObjectPage />,
     '/openai/completions/create': <CreateCompletionPage />,
+    '/google/chat/generate': <GoogleGenerateContentPage />,
+    '/google/chat/stream': <GoogleStreamGenerateContentPage />,
+    '/google/image/generate': <GoogleGenerateImagePage />,
+    '/google/image/stream': <GoogleStreamGenerateImagePage />,
+    '/google/analyze/media': <GoogleAnalyzeMediaPage />,
+    '/google/analyze/youtube': <GoogleAnalyzeYouTubePage />,
   };
 
   const hasCustomPage = path in pageComponents;
