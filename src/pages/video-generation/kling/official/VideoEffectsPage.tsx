@@ -20,7 +20,7 @@ export default function VideoEffectsPage() {
   "effect_scene": "squish",
   "input": {
     "model_name": "kling-v1-6",
-    "image": "https://wiki.tu-zi.com/code/mdjourney/cat_2.png",
+    "image": "https://example.com/image.png",
     "duration": "5",
     "mode": "std"
   }

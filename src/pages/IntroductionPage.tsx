@@ -176,7 +176,7 @@ export function IntroductionPage() {
             language="json"
             code={`{
   "model": "gpt-4o-image",
-  "prompt": "一只戴着蓝色围巾的兔子，卡通，高清",
+  "prompt": "一只戴着蓝色围巾的小猫，卡通，高清",
   "size": "1024x1024",
   "n": 1
 }`}
@@ -202,7 +202,7 @@ export function IntroductionPage() {
             code={`curl -X POST ${BASE_URL}/v1/images/generations \\
   -H "Authorization: Bearer <Your_API_Key>" \\
   -H "Content-Type: application/json" \\
-  -d '{"model":"gpt-4o-image","prompt":"戴蓝围巾的可爱兔子","size":"1024x1024","n":1}'`}
+  -d '{"model":"gpt-4o-image","prompt":"戴蓝围巾的可爱小猫","size":"1024x1024","n":1}'`}
           />
         </section>
 

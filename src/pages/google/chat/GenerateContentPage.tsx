@@ -21,7 +21,7 @@ export default function GenerateContentPage() {
     {
       "parts": [
         {
-          "text": "写一个兔子背书的故事."
+          "text": "用一句话介绍 OranAI API"
         }
       ]
     }
@@ -36,12 +36,13 @@ export default function GenerateContentPage() {
       {
         "parts": [
           {
-            "text": "写一个兔子背书的故事."
+            "text": "用一句话介绍 OranAI API"
           }
         ]
       }
     ]
   }'`;
+
 
   return (
     <>
