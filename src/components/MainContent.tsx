@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useNavigation } from '@/hooks/useNavigation';
 import { IntroductionPage } from '@/pages/IntroductionPage';
+import { UserInfoPage } from '@/pages/system/UserInfoPage';
 import { PageNavigation } from '@/components/docs/PageNavigation';
 import { BASE_URL } from '@/config/constants';
 
@@ -14,12 +15,24 @@ export function MainContent() {
   const title = currentItem?.title || '欢迎使用 OranAI API';
 
   const isIntroduction = location.pathname === '/introduction' || location.pathname === '/';
+  const isUserInfo = location.pathname === '/system/user-info';
+
+  // Render the appropriate page component
+  const renderContent = () => {
+    if (isIntroduction) {
+      return <IntroductionPage />;
+    }
+    if (isUserInfo) {
+      return <UserInfoPage />;
+    }
+    return <PlaceholderContent title={title} />;
+  };
 
   return (
     <main className="flex-1 min-w-0 h-screen overflow-auto bg-background">
       <div className="max-w-[1200px] mx-auto px-10 py-10">
-        {/* Header - only show for non-introduction pages */}
-        {!isIntroduction && (
+        {/* Header - only show for placeholder pages */}
+        {!isIntroduction && !isUserInfo && (
           <div className="mb-8">
             {breadcrumb.length > 1 && (
               <div className="text-sm text-muted-foreground mb-2">
@@ -31,11 +44,7 @@ export function MainContent() {
         )}
 
         {/* Content */}
-        {isIntroduction ? (
-          <IntroductionPage />
-        ) : (
-          <PlaceholderContent title={title} />
-        )}
+        {renderContent()}
       </div>
     </main>
   );
