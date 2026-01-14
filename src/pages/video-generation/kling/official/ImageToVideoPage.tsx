@@ -18,7 +18,7 @@ export default function ImageToVideoPage() {
 
   const requestExample = `{
   "model_name": "kling-v1-5",
-  "image": "https://wiki.tu-zi.com/code/mdjourney/cat_2.png",
+  "image": "https://example.com/image.png",
   "prompt": "飞快的跑起来",
   "cfg_scale": 1,
   "mode": "std",

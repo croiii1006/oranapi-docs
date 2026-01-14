@@ -21,7 +21,7 @@ export default function StreamGenerateContentPage() {
     {
       "parts": [
         {
-          "text": "写一个兔子背书的故事."
+          "text": "用一句话介绍 OranAI API"
         }
       ]
     }
@@ -34,7 +34,7 @@ export default function StreamGenerateContentPage() {
       "content": {
         "parts": [
           {
-            "text": "在绿意盎然的橡树林里，住着一只名叫小跳的兔子..."
+            "text": "OranAI API 是一个统一的多模态 AI 能力聚合平台，提供聊天、图像生成、视频生成等服务..."
           }
         ],
         "role": "model"

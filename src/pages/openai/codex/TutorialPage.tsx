@@ -5,13 +5,13 @@ import { Blockquote } from '@/components/docs/Blockquote';
 import { TableOfContents } from '@/components/docs/TableOfContents';
 import { PageNavigation } from '@/components/docs/PageNavigation';
 import CopyPageDropdown from '@/components/docs/CopyPageDropdown';
-import { SYSTEM_NAME } from '@/config/constants';
+import { SYSTEM_NAME, BASE_URL } from '@/config/constants';
 
 const tocItems = [
   { id: 'overview', title: '平台概览', level: 2 },
   { id: 'requirements', title: '系统需求与兼容性', level: 2 },
   { id: 'installation', title: '一键安装指南', level: 2 },
-  { id: 'api-config', title: '兔子 API 配置指南', level: 2 },
+  { id: 'api-config', title: 'OranAI API 配置指南', level: 2 },
   { id: 'quickstart', title: '快速启动与验证', level: 2 },
   { id: 'sandbox', title: '安全策略与沙箱管理', level: 2 },
   { id: 'troubleshooting', title: '故障排除与技术支持', level: 2 },
@@ -40,12 +40,12 @@ export function CodexTutorialPage() {
         <div className="flex flex-wrap gap-2 mb-6">
           <img src="https://img.shields.io/badge/version-v1.0-blue" alt="Version" />
           <img src="https://img.shields.io/badge/license-MIT-green" alt="License" />
-          <img src="https://img.shields.io/badge/API-TUzi%20API-orange" alt="API" />
+          <img src="https://img.shields.io/badge/API-OranAI%20API-orange" alt="API" />
           <img src="https://img.shields.io/badge/platform-multi--platform-lightgrey" alt="Platform" />
         </div>
 
         <Blockquote variant="info">
-          <strong>Open AI 下的 Codex 编程工具</strong> - 基于官方 Codex 配置 兔子 API 中转的强大AI编程工具！
+          <strong>Open AI 下的 Codex 编程工具</strong> - 基于官方 Codex 配置 OranAI API 中转的强大AI编程工具！
         </Blockquote>
 
         {/* Platform Overview */}
@@ -53,7 +53,7 @@ export function CodexTutorialPage() {
           <h2 className="doc-heading-h2">平台概览</h2>
           <div className="p-6 bg-muted/30 rounded-xl border border-border">
             <pre className="text-sm text-muted-foreground whitespace-pre-wrap">
-{`👨‍💻 开发者 → 💻 Codex CLI → 🐰 兔子 API → 🤖 AI 模型引擎
+{`👨‍💻 开发者 → 💻 Codex CLI → 🍊 OranAI API → 🤖 AI 模型引擎
                                     ↓
               ┌────────────────────┼────────────────────┐
               ↓                    ↓                    ↓
@@ -186,11 +186,11 @@ brew upgrade codex          # 升级版本`}
 
         {/* API Configuration */}
         <section id="api-config" className="mt-10">
-          <h2 className="doc-heading-h2">2. 兔子 API 配置指南</h2>
+          <h2 className="doc-heading-h2">2. OranAI API 配置指南</h2>
 
           <h3 className="doc-heading-h3">🔑 账户注册</h3>
           <Blockquote variant="tip">
-            <strong>快速注册</strong>：访问 <a href="https://api.tu-zi.com" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">https://api.tu-zi.com</a>
+            <strong>快速注册</strong>：访问 <a href="https://models.photog.art" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">https://models.photog.art</a>
           </Blockquote>
 
           <h3 className="doc-heading-h3">🔐 API 密钥管理</h3>
@@ -198,7 +198,7 @@ brew upgrade codex          # 升级版本`}
             <strong className="text-foreground">操作步骤：</strong>
           </p>
           <ol className="list-decimal list-inside space-y-2 text-muted-foreground text-[15px] mb-4">
-            <li>登录控制台：<InlineCode>https://api.tu-zi.com/panel</InlineCode></li>
+            <li>登录控制台：<InlineCode>https://models.photog.art/panel</InlineCode></li>
             <li>生成 API Key，密钥格式示例：<InlineCode>sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</InlineCode></li>
           </ol>
 
@@ -229,13 +229,13 @@ nano ~/.codex/config.toml`}
             title="config.toml"
             code={`# ⚙️ 核心设置
 model = "gpt-5"    # 默认AI模型
-model_provider = "tuzi"  # 服务提供商
+model_provider = "oranai"  # 服务提供商
 model_reasoning_effort = "high"
 disable_response_storage = true
 
-[model_providers.tuzi]
-name = "tuzi"
-base_url = "https://api.tu-zi.com/v1"
+[model_providers.oranai]
+name = "oranai"
+base_url = "https://models.photog.art/v1"
 env_key = "CODEX_API_KEY"    
 wire_api = "responses"`}
           />
@@ -254,7 +254,7 @@ wire_api = "responses"`}
             language="bash"
             title="环境配置"
             code={`# ~/.bashrc 或 ~/.zshrc
-echo 'export CODEX_API_KEY=sk-MP***' >> ~/.bashrc # 配置兔子api key
+echo 'export CODEX_API_KEY=sk-MP***' >> ~/.bashrc # 配置 OranAI API key
 
 # 🔄 重新加载环境
 source ~/.bashrc`}
@@ -400,13 +400,13 @@ codex --batch-mode --auto-confirm "自动化脚本执行"`}
             language="bash"
             title="连接状态检查"
             code={`# 网络连通性测试
-ping -c 4 api.tu-zi.com
+ping -c 4 models.photog.art
 
 # 端口连接测试
-telnet api.tu-zi.com 443
+telnet models.photog.art 443
 
 # DNS 解析检查
-nslookup api.tu-zi.com`}
+nslookup models.photog.art`}
           />
 
           <h3 className="doc-heading-h3 mt-6">📄 配置文件问题</h3>
@@ -514,7 +514,7 @@ gc_threshold = 0.8
 worker_threads = 4
 
 # 🎯 模型特定优化
-[model_providers.coultra.performance]
+[model_providers.oranai.performance]
 batch_processing = true
 context_window = 128000
 temperature = 0.1
@@ -539,8 +539,8 @@ max_tokens = 4096`}
               <tbody className="text-muted-foreground">
                 <tr className="border-b border-border/50">
                   <td className="py-3 px-4 font-medium text-foreground">🏠 官方主页</td>
-                  <td className="py-3 px-4">兔子 API 服务</td>
-                  <td className="py-3 px-4"><a href="https://api.tu-zi.com" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">https://api.tu-zi.com</a></td>
+                  <td className="py-3 px-4">OranAI API 服务</td>
+                  <td className="py-3 px-4"><a href="https://models.photog.art" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">https://models.photog.art</a></td>
                 </tr>
                 <tr className="border-b border-border/50">
                   <td className="py-3 px-4 font-medium text-foreground">📖 GitHub 仓库</td>
@@ -548,9 +548,9 @@ max_tokens = 4096`}
                   <td className="py-3 px-4"><a href="https://github.com/openai/codex" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">github.com/openai/codex</a></td>
                 </tr>
                 <tr>
-                  <td className="py-3 px-4 font-medium text-foreground">💬 社区论坛</td>
-                  <td className="py-3 px-4">技术讨论和问题解答</td>
-                  <td className="py-3 px-4"><a href="https://wiki.tu-zi.com" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">https://wiki.tu-zi.com</a></td>
+                  <td className="py-3 px-4 font-medium text-foreground">💬 API 文档</td>
+                  <td className="py-3 px-4">技术文档和接口说明</td>
+                  <td className="py-3 px-4"><a href="https://models.photog.art/docs" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">https://models.photog.art/docs</a></td>
                 </tr>
               </tbody>
             </table>
@@ -580,7 +580,7 @@ max_tokens = 4096`}
         {/* Footer */}
         <div className="mt-10 p-6 bg-muted/30 rounded-xl border border-border text-center">
           <p className="text-muted-foreground text-[15px]">
-            <strong className="text-foreground">感谢使用兔子API + Codex</strong>
+            <strong className="text-foreground">感谢使用 OranAI API + Codex</strong>
           </p>
           <p className="text-sm text-muted-foreground mt-2">
             让 AI 成为您编程路上最得力的助手 ✨
