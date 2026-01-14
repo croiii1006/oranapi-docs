@@ -2,6 +2,8 @@ import { useLocation } from 'react-router-dom';
 import { useNavigation } from '@/hooks/useNavigation';
 import { IntroductionPage } from '@/pages/IntroductionPage';
 import { UserInfoPage } from '@/pages/system/UserInfoPage';
+import { KeyInfoPage } from '@/pages/system/KeyInfoPage';
+import { OpenAIIntroductionPage } from '@/pages/openai/IntroductionPage';
 import { PageNavigation } from '@/components/docs/PageNavigation';
 import { BASE_URL } from '@/config/constants';
 
@@ -16,15 +18,18 @@ export function MainContent() {
 
   const isIntroduction = location.pathname === '/introduction' || location.pathname === '/';
   const isUserInfo = location.pathname === '/system/user-info';
+  const isKeyInfo = location.pathname === '/system/key-info';
+  const isOpenAIIntro = location.pathname === '/openai/introduction';
+
+  // Check if current page has a custom component
+  const hasCustomPage = isIntroduction || isUserInfo || isKeyInfo || isOpenAIIntro;
 
   // Render the appropriate page component
   const renderContent = () => {
-    if (isIntroduction) {
-      return <IntroductionPage />;
-    }
-    if (isUserInfo) {
-      return <UserInfoPage />;
-    }
+    if (isIntroduction) return <IntroductionPage />;
+    if (isUserInfo) return <UserInfoPage />;
+    if (isKeyInfo) return <KeyInfoPage />;
+    if (isOpenAIIntro) return <OpenAIIntroductionPage />;
     return <PlaceholderContent title={title} />;
   };
 
@@ -32,7 +37,7 @@ export function MainContent() {
     <main className="flex-1 min-w-0 h-screen overflow-auto bg-background">
       <div className="max-w-[1200px] mx-auto px-10 py-10">
         {/* Header - only show for placeholder pages */}
-        {!isIntroduction && !isUserInfo && (
+        {!hasCustomPage && (
           <div className="mb-8">
             {breadcrumb.length > 1 && (
               <div className="text-sm text-muted-foreground mb-2">
