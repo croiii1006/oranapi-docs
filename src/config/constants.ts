@@ -6,5 +6,5 @@ export const API_CONFIG = {
   version: "v1",
 } as const;
 
-export const CONTACT_EMAIL = "sydney@sydney-ai.com";
+export const CONTACT_EMAIL = "cto@orannai.com";
 export const SYSTEM_NAME = "OranAI API";
