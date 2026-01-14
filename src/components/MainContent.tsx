@@ -13,6 +13,11 @@ import { ImageObjectPage } from '@/pages/openai/images/ObjectPage';
 import { CreateImagePage } from '@/pages/openai/images/CreatePage';
 import { EditImagePage } from '@/pages/openai/images/EditPage';
 import { VariationImagePage } from '@/pages/openai/images/VariationPage';
+import SpeechPage from '@/pages/openai/audio/SpeechPage';
+import TranscriptionPage from '@/pages/openai/audio/TranscriptionPage';
+import TranslationPage from '@/pages/openai/audio/TranslationPage';
+import CompletionObjectPage from '@/pages/openai/completions/ObjectPage';
+import CreateCompletionPage from '@/pages/openai/completions/CreatePage';
 import { PageNavigation } from '@/components/docs/PageNavigation';
 import { BASE_URL } from '@/config/constants';
 
@@ -42,6 +47,11 @@ export function MainContent() {
     '/openai/images/create': <CreateImagePage />,
     '/openai/images/edit': <EditImagePage />,
     '/openai/images/variation': <VariationImagePage />,
+    '/openai/audio/speech': <SpeechPage />,
+    '/openai/audio/transcription': <TranscriptionPage />,
+    '/openai/audio/translation': <TranslationPage />,
+    '/openai/completions/object': <CompletionObjectPage />,
+    '/openai/completions/create': <CreateCompletionPage />,
   };
 
   const hasCustomPage = path in pageComponents;
