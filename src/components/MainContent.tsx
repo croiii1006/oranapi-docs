@@ -24,6 +24,11 @@ import GoogleGenerateImagePage from '@/pages/google/image/GenerateImagePage';
 import GoogleStreamGenerateImagePage from '@/pages/google/image/StreamGenerateImagePage';
 import GoogleAnalyzeMediaPage from '@/pages/google/analyze/AnalyzeMediaPage';
 import GoogleAnalyzeYouTubePage from '@/pages/google/analyze/AnalyzeYouTubePage';
+import ClaudeMessagesPage from '@/pages/anthropic/chat/ClaudeMessagesPage';
+import GptImageChatGeneratePage from '@/pages/image-generation/gpt-image/chat/GeneratePage';
+import GptImageChatGenerateWithImagePage from '@/pages/image-generation/gpt-image/chat/GenerateWithImagePage';
+import GptImageDalleCreatePage from '@/pages/image-generation/gpt-image/dalle/CreatePage';
+import GptImageDalleEditPage from '@/pages/image-generation/gpt-image/dalle/EditPage';
 import { PageNavigation } from '@/components/docs/PageNavigation';
 import { BASE_URL } from '@/config/constants';
 
@@ -64,6 +69,11 @@ export function MainContent() {
     '/google/image/stream': <GoogleStreamGenerateImagePage />,
     '/google/analyze/media': <GoogleAnalyzeMediaPage />,
     '/google/analyze/youtube': <GoogleAnalyzeYouTubePage />,
+    '/anthropic/chat/messages': <ClaudeMessagesPage />,
+    '/image-generation/gpt-image/chat/generate': <GptImageChatGeneratePage />,
+    '/image-generation/gpt-image/chat/with-image': <GptImageChatGenerateWithImagePage />,
+    '/image-generation/gpt-image/dalle/create': <GptImageDalleCreatePage />,
+    '/image-generation/gpt-image/dalle/edit': <GptImageDalleEditPage />,
   };
 
   const hasCustomPage = path in pageComponents;
