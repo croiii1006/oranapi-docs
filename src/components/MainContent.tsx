@@ -29,6 +29,13 @@ import GptImageChatGeneratePage from '@/pages/image-generation/gpt-image/chat/Ge
 import GptImageChatGenerateWithImagePage from '@/pages/image-generation/gpt-image/chat/GenerateWithImagePage';
 import GptImageDalleCreatePage from '@/pages/image-generation/gpt-image/dalle/CreatePage';
 import GptImageDalleEditPage from '@/pages/image-generation/gpt-image/dalle/EditPage';
+import KlingTextToVideoPage from '@/pages/video-generation/kling/official/TextToVideoPage';
+import KlingImageToVideoPage from '@/pages/video-generation/kling/official/ImageToVideoPage';
+import KlingVideoEffectsPage from '@/pages/video-generation/kling/official/VideoEffectsPage';
+import KlingQueryTaskPage from '@/pages/video-generation/kling/official/QueryTaskPage';
+import KlingQueryEffectsPage from '@/pages/video-generation/kling/official/QueryEffectsPage';
+import KlingGenerateVideoPage from '@/pages/video-generation/kling/openai/GenerateVideoPage';
+import KlingQueryVideoPage from '@/pages/video-generation/kling/openai/QueryVideoPage';
 import { PageNavigation } from '@/components/docs/PageNavigation';
 import { BASE_URL } from '@/config/constants';
 
@@ -74,6 +81,13 @@ export function MainContent() {
     '/image-generation/gpt-image/chat/with-image': <GptImageChatGenerateWithImagePage />,
     '/image-generation/gpt-image/dalle/create': <GptImageDalleCreatePage />,
     '/image-generation/gpt-image/dalle/edit': <GptImageDalleEditPage />,
+    '/video-generation/kling/official/text-to-video': <KlingTextToVideoPage />,
+    '/video-generation/kling/official/image-to-video': <KlingImageToVideoPage />,
+    '/video-generation/kling/official/video-effects': <KlingVideoEffectsPage />,
+    '/video-generation/kling/official/query-task': <KlingQueryTaskPage />,
+    '/video-generation/kling/official/query-effects': <KlingQueryEffectsPage />,
+    '/video-generation/kling/openai/generate': <KlingGenerateVideoPage />,
+    '/video-generation/kling/openai/query': <KlingQueryVideoPage />,
   };
 
   const hasCustomPage = path in pageComponents;
