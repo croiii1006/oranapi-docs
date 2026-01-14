@@ -1,0 +1,60 @@
+# OranAI API Documentation
+
+> OranAI API is a unified gateway service for accessing various AI model APIs.
+
+## Base URL
+
+https://models.photog.art
+
+## Authentication
+
+All API requests require authentication via Bearer token in the Authorization header:
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+## Available Endpoints
+
+### Chat Completions
+- POST /v1/chat/completions - Generate chat completions
+
+### Image Generation
+- POST /v1/images/generations - Generate images from text prompts
+
+### Embeddings
+- POST /v1/embeddings - Generate text embeddings
+
+### Models
+- GET /v1/models - List available models
+
+## Response Format
+
+All responses are returned in JSON format with the following structure:
+
+```json
+{
+  "id": "chatcmpl-xxx",
+  "object": "chat.completion",
+  "created": 1234567890,
+  "model": "gpt-4",
+  "choices": [...],
+  "usage": {...}
+}
+```
+
+## Error Handling
+
+Errors follow standard HTTP status codes:
+- 400: Bad Request
+- 401: Unauthorized
+- 429: Rate Limited
+- 500: Internal Server Error
+
+## Rate Limits
+
+Rate limits vary by subscription tier. Check your dashboard for current limits.
+
+## Contact
+
+For support, visit: https://models.photog.art/support

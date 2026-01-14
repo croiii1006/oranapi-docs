@@ -71,12 +71,15 @@ export function Sidebar() {
       <aside className="w-[300px] min-w-[300px] h-screen flex flex-col bg-sidebar border-r border-sidebar-border shrink-0">
         {/* Logo */}
         <div className="px-4 py-3.5 border-b border-sidebar-border">
-          <div className="flex items-center gap-3">
+          <a 
+            href="/introduction" 
+            className="flex items-center gap-3 hover:opacity-80 transition-opacity cursor-pointer"
+          >
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#E67E22] to-[#D35400] flex items-center justify-center shadow-sm">
               <span className="text-white font-bold text-lg">O</span>
             </div>
             <span className="font-bold text-lg text-slate-900 dark:text-foreground tracking-tight">OranAI API</span>
-          </div>
+          </a>
         </div>
 
         {/* Search */}
