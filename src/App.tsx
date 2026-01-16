@@ -14,7 +14,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/doc/openai">
         <Routes>
           {/* All documentation routes use the same layout */}
           <Route path="/*" element={<Index />} />
