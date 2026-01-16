@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { SidebarNavItem } from './SidebarNavItem';
 import { SearchCommand, SearchTrigger } from './SearchCommand';
@@ -72,12 +72,12 @@ export function Sidebar() {
       <aside className="w-[300px] min-w-[300px] h-screen flex flex-col bg-sidebar border-r border-sidebar-border shrink-0">
         {/* Logo */}
         <div className="px-4 py-3.5 border-b border-sidebar-border">
-          <a 
-            href="/introduction" 
+          <Link 
+            to="/introduction" 
             className="flex items-center hover:opacity-80 transition-opacity cursor-pointer"
           >
             <img src={oranaiLogo} alt="OranAI API" className="h-8" />
-          </a>
+          </Link>
         </div>
 
         {/* Search */}
